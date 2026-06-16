@@ -165,12 +165,10 @@
         <!-- PAGE HEADER -->
         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mb-10">
             <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
-                Hotel Reservation &amp; Billing<br class="hidden sm:block" />
-                Management System
+                Bigpond Website
             </h1>
 
-            <a href="index.html"
-                class="btn-secondary text-sm flex items-center gap-2 self-start shrink-0">
+            <a href="index.html" class="btn-secondary text-sm flex items-center gap-2 self-start shrink-0">
                 ← Back
             </a>
         </div>
@@ -185,7 +183,7 @@
 
             <div class="card p-6">
                 <p class="label">Stack</p>
-                <p class="font-bold text-lg mt-4">HTML · CSS · PHP · JavaScript · MySQL</p>
+                <p class="font-bold text-lg mt-4">HTML · CSS · Shopify</p>
             </div>
 
             <div class="card p-6">
@@ -199,10 +197,12 @@
         <div class="card p-8 mb-12">
             <h2 class="font-bold text-lg mb-4">Overview</h2>
             <p class="text-muted leading-8">
-                A full-stack hotel reservation and billing management system built with PHP, JavaScript, and MySQL.
-                It features an admin panel with room management, guest check-in and check-out, transaction
-                processing, automated billing, and reporting — as well as a client-facing dashboard for browsing
-                available rooms, making reservations, and reviewing past bookings.
+                A Shopify website for Little Pond Learning Center, an educational institution offering enrichment
+                programs for young learners. The work covered the full design-to-build pipeline — Figma wireframes
+                for the homepage and About Us pages, followed by implementation using Shopify with custom HTML and
+                CSS. The site presents the center's academic programs including Filipino, Math, Reading, UPKAT Review,
+                Forest Playgroup, and Enrichment tracks, and integrates product management for an accompanying
+                books catalog via the Shopify admin.
             </p>
         </div>
 
@@ -232,18 +232,15 @@
     <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
         role="dialog" aria-modal="true">
 
-        <button id="lbClose" aria-label="Close"
-            class="lb-btn absolute top-5 right-5 text-lg">
+        <button id="lbClose" aria-label="Close" class="lb-btn absolute top-5 right-5 text-lg">
             ✕
         </button>
 
-        <button id="lbPrev" aria-label="Previous"
-            class="lb-btn absolute left-4 top-1/2 -translate-y-1/2 text-xl">
+        <button id="lbPrev" aria-label="Previous" class="lb-btn absolute left-4 top-1/2 -translate-y-1/2 text-xl">
             ‹
         </button>
 
-        <button id="lbNext" aria-label="Next"
-            class="lb-btn absolute right-4 top-1/2 -translate-y-1/2 text-xl">
+        <button id="lbNext" aria-label="Next" class="lb-btn absolute right-4 top-1/2 -translate-y-1/2 text-xl">
             ›
         </button>
 
@@ -258,18 +255,9 @@
 
     <script>
         const images = [
-            { src: 'assets/Project One/admin-dashboard.jpg', label: 'Dashboard', num: '01' },
-            { src: 'assets/Project One/admin-date-selection.jpg', label: 'Booking', num: '02' },
-            { src: 'assets/Project One/admin-modify-client-room.jpg', label: 'Client Mgmt', num: '03' },
-            { src: 'assets/Project One/admin-modify-room.jpg', label: 'Room Config', num: '04' },
-            { src: 'assets/Project One/admin-modify-transaction.jpg', label: 'Billing', num: '05' },
-            { src: 'assets/Project One/admin-reports.jpg', label: 'Reports', num: '06' },
-            { src: 'assets/Project One/admin-room.jpg', label: 'Rooms', num: '07' },
-            { src: 'assets/Project One/admin-transaction-list.jpg', label: 'Transactions', num: '08' },
-            { src: 'assets/Project One/admin-transaction.jpg', label: 'Invoice', num: '09' },
-            { src: 'assets/Project One/client-dashboard.jpg', label: 'Client View', num: '10' },
-            { src: 'assets/Project One/client-reference.jpg', label: 'Reference', num: '11' },
-            { src: 'assets/Project One/client-reviews.jpg', label: 'Reviews', num: '12' },
+            { src: 'assets/Project Two/picture_one.jpg', label: 'Homepage', num: '01' },
+            { src: 'assets/Project Two/picture_two.jpg', label: 'Product Page', num: '02' },
+            { src: 'assets/Project Two/picture_three.jpg', label: 'Shopping Cart', num: '03' },
         ];
 
         // render thumbnails
