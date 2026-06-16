@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Hotel Reservation System | Ayevin Aron Hao</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Inter", "system-ui", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <style>
+        .gallery-thumb {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            cursor: pointer;
+            aspect-ratio: 16 / 10;
+            border: 1px solid #27272a;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .gallery-thumb:hover {
+            transform: translateY(-3px);
+            border-color: #52525b;
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-thumb:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery-thumb .thumb-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.65rem 0.75rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .num-badge {
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.18rem 0.5rem;
+            border-radius: 999px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .label-badge {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.18rem 0.6rem;
+            border-radius: 999px;
+        }
+
+        /* lightbox */
+        #lightbox {
+            display: none;
+        }
+
+        #lightbox.active {
+            display: flex;
+        }
+
+        .lb-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: white;
+            border-radius: 999px;
+            width: 2.75rem;
+            height: 2.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .lb-btn:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        /* light theme gallery adjustments */
+        .theme-light .gallery-thumb {
+            border-color: #e4e4e7;
+        }
+
+        .theme-light .gallery-thumb:hover {
+            border-color: #a1a1aa;
+        }
+    </style>
+</head>
+
+<body class="font-sans theme-dark">
+
+    <!-- apply saved theme before render -->
+    <script>
+        (function () {
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.replace('theme-dark', 'theme-light');
+            }
+        })();
+    </script>
+
+    <!-- NAVBAR -->
+    <header class="navbar fixed top-0 left-0 w-full z-50 border-b backdrop-blur-xl">
+        <nav class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+
+            <a href="index.html" class="font-bold text-lg">
+                Ayevin Aron Hao
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 text-sm text-muted">
+                <a href="index.html#about" class="hover:text-white transition">About</a>
+                <a href="index.html#experiences" class="hover:text-white transition">Experiences</a>
+                <a href="index.html#skills" class="hover:text-white transition">Skills</a>
+                <a href="index.html#contact" class="hover:text-white transition">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button id="themeBtn" class="btn-secondary rounded-xl px-3 py-2">☾</button>
+                <a href="mailto:haoayevinaron@gmail.com"
+                    class="hidden sm:block btn-secondary rounded-xl px-4 py-2 text-sm">
+                    Email me
+                </a>
+            </div>
+
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 pt-28 pb-24">
+
+        <!-- PAGE HEADER -->
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mb-10">
+            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+                Hotel Reservation &amp; Billing<br class="hidden sm:block" />
+                Management System
+            </h1>
+
+            <a href="index.html"
+                class="btn-secondary text-sm flex items-center gap-2 self-start shrink-0">
+                ← Back
+            </a>
+        </div>
+
+        <!-- INFO CARDS -->
+        <div class="grid sm:grid-cols-3 gap-4 mb-8">
+
+            <div class="card p-6">
+                <p class="label">Role</p>
+                <p class="font-bold text-lg mt-4">Full-Stack Developer</p>
+            </div>
+
+            <div class="card p-6">
+                <p class="label">Stack</p>
+                <p class="font-bold text-lg mt-4">HTML · CSS · PHP · JavaScript · MySQL</p>
+            </div>
+
+            <div class="card p-6">
+                <p class="label">Date</p>
+                <p class="font-bold text-lg mt-4">2024</p>
+            </div>
+
+        </div>
+
+        <!-- OVERVIEW -->
+        <div class="card p-8 mb-12">
+            <h2 class="font-bold text-lg mb-4">Overview</h2>
+            <p class="text-muted leading-8">
+                A full-stack hotel reservation and billing management system built with PHP, JavaScript, and MySQL.
+                It features an admin panel with room management, guest check-in and check-out, transaction
+                processing, automated billing, and reporting — as well as a client-facing dashboard for browsing
+                available rooms, making reservations, and reviewing past bookings.
+            </p>
+        </div>
+
+        <!-- GALLERY -->
+        <div>
+
+            <div class="flex items-end justify-between mb-5">
+                <div>
+                    <h2 class="font-bold text-2xl">Gallery</h2>
+                    <p class="text-muted text-sm mt-1">Click any image to open the lightbox.</p>
+                </div>
+                <span class="text-muted text-sm">12 images</span>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="gallery"></div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-10 text-center text-muted border-t">
+        © 2026 Ayevin Aron Hao. Built with HTML, TailwindCSS, and JavaScript.
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+        role="dialog" aria-modal="true">
+
+        <button id="lbClose" aria-label="Close"
+            class="lb-btn absolute top-5 right-5 text-lg">
+            ✕
+        </button>
+
+        <button id="lbPrev" aria-label="Previous"
+            class="lb-btn absolute left-4 top-1/2 -translate-y-1/2 text-xl">
+            ‹
+        </button>
+
+        <button id="lbNext" aria-label="Next"
+            class="lb-btn absolute right-4 top-1/2 -translate-y-1/2 text-xl">
+            ›
+        </button>
+
+        <div class="flex flex-col items-center max-w-5xl w-full px-20">
+            <img id="lbImg" src="" alt="" class="max-h-[78vh] max-w-full object-contain rounded-xl" />
+            <p id="lbCaption" class="text-white/50 text-sm mt-4 tracking-wide"></p>
+        </div>
+
+    </div>
+
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        const images = [
+            { src: 'assets/Project One/admin-dashboard.jpg', label: 'Dashboard', num: '01' },
+            { src: 'assets/Project One/admin-date-selection.jpg', label: 'Booking', num: '02' },
+            { src: 'assets/Project One/admin-modify-client-room.jpg', label: 'Client Mgmt', num: '03' },
+            { src: 'assets/Project One/admin-modify-room.jpg', label: 'Room Config', num: '04' },
+            { src: 'assets/Project One/admin-modify-transaction.jpg', label: 'Billing', num: '05' },
+            { src: 'assets/Project One/admin-reports.jpg', label: 'Reports', num: '06' },
+            { src: 'assets/Project One/admin-room.jpg', label: 'Rooms', num: '07' },
+            { src: 'assets/Project One/admin-transaction-list.jpg', label: 'Transactions', num: '08' },
+            { src: 'assets/Project One/admin-transaction.jpg', label: 'Invoice', num: '09' },
+            { src: 'assets/Project One/client-dashboard.jpg', label: 'Client View', num: '10' },
+            { src: 'assets/Project One/client-reference.jpg', label: 'Reference', num: '11' },
+            { src: 'assets/Project One/client-reviews.jpg', label: 'Reviews', num: '12' },
+        ];
+
+        // render thumbnails
+        const galleryEl = document.getElementById('gallery');
+        images.forEach((img, i) => {
+            const div = document.createElement('div');
+            div.className = 'gallery-thumb';
+            div.innerHTML = `
+                <img src="${img.src}" alt="${img.label}" loading="lazy" />
+                <div class="thumb-overlay">
+                    <span class="num-badge">#${img.num}</span>
+                    <span class="label-badge">${img.label}</span>
+                </div>
+            `;
+            div.addEventListener('click', () => openLightbox(i));
+            galleryEl.appendChild(div);
+        });
+
+        // lightbox logic
+        let current = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lbImg');
+        const lbCaption = document.getElementById('lbCaption');
+
+        function openLightbox(index) {
+            current = index;
+            update();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function update() {
+            const img = images[current];
+            lbImg.src = img.src;
+            lbImg.alt = img.label;
+            lbCaption.textContent = `${img.num} / ${images.length} — ${img.label}`;
+        }
+
+        document.getElementById('lbClose').addEventListener('click', closeLightbox);
+
+        document.getElementById('lbPrev').addEventListener('click', () => {
+            current = (current - 1 + images.length) % images.length;
+            update();
+        });
+
+        document.getElementById('lbNext').addEventListener('click', () => {
+            current = (current + 1) % images.length;
+            update();
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') { current = (current - 1 + images.length) % images.length; update(); }
+            if (e.key === 'ArrowRight') { current = (current + 1) % images.length; update(); }
+        });
+    </script>
+
+</body>
+
+</html>
